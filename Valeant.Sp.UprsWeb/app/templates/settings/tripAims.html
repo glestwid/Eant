@@ -1,0 +1,16 @@
+﻿<div class="row col-lg-12">
+    <div class="panel panel-default val-panel">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="col-lg-4 val-text nopadding">Цели поездки</h3>
+                <div class="col-lg-5 pull-right">
+                    <button class="btn btn-primary val-btn pull-right" ng-click="addRow()">Создать</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div ui-if="gridOptions.data.length > 0" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize class="grid" ng-style="{height: gridOptions.appScopeProvider.getGridHeight()}"></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+Id="3d21eefb-7da9-46a5-8d4d-e6417853b5d8" 
+Title="Valeant uprs claims provider" 
+Scope="Farm"
+ReceiverAssembly="Valeant.Sp.Uprs.ClaimsProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71baec56fbcc9720"
+ReceiverClass="Valeant.Sp.Uprs.ClaimsProvider.ClaimsProviderReciver"
+AlwaysForceInstall="true">
+</Feature>

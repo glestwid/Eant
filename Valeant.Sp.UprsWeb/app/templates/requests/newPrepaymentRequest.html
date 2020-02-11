@@ -1,0 +1,127 @@
+﻿<style>
+    .form-group > .input-group {
+        width: 140px;
+    }
+</style>
+
+
+<form name="form" class="col-lg-12">
+    <div class="row col-lg-12">
+        <div class="col-lg-10">
+            <h5 class="help-block">Заявки / Заявка на аванс</h5>
+        </div>
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-default pull-right" ng-click="print()" ng-if="action.indexOf('Создать') == -1">
+                <span class="val-text">{{'Печать'|uppercase}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <hr />
+    </div>
+
+    <div class="row col-lg-12 nopadding">
+        <div class="panel panel-default val-panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="form-inline col-lg-12">
+                        <h3 class="col-lg-12 val-text">Заявка на аванс {{formData.number ? '№' + formData.number : ''}}</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-inline col-lg-12">
+                        <div class="form-group col-lg-12">
+                            <span class="text-muted">Дата заполнения заявки</span>
+                            <span class="text-muted">&nbsp;&nbsp;</span>
+                            <div class="form-group has-feedback single-datepicker">
+                                <input date-range-picker ng-disabled="true" options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="formData.advanceRequestsData.options.advanceDate" />
+                                <i class="fa fa-calendar form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body table-responsive nopadding">
+                <table class="table table-bordered table-hover val-table ext-table">
+                    <thead>
+                        <tr>
+                            <th width="25px">№</th>
+                            <th width="30%">Статья расходов</th>
+                            <th width="150px">Ваш лимит</th>
+                            <th width="150px">Аванс</th>
+                            <th>Комментарий</th>
+                            <th width="30px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ar in formData.advanceRequestsData.rows track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td>
+                                <select ng-change="selectChanged(ar, {{ar.costItem || 'undefined'}})"
+                                        ng-disabled="accessList.cost == 1"
+                                        ng-model="ar.costItem"
+                                        ng-options="item as item.Name disable when (item.IsActive !== true) for item in costItems track by item.Id"
+                                        selectpicker class="form-control" data-container="body" title="Выберите...">
+                                    <option data-hidden="true"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <p class="form-control-static">{{ar.costItem.Limit}}</p>
+                            </td>
+                            <td>
+                                <input ng-disabled="accessList.cost == 1" ng-focus="inputFocus(ar)" ng-blur="inputBlur(ar)" ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$" type="text" class="form-control" ng-class="" ng-model="ar.advance" validation-name="advance" validation-dynamically-defined="validations"/>
+                                <span class="text-bold pull-right" ng-class="'text-danger'" ng-show="ar.advance > ar.costItem.Limit">Превышен лимит</span>
+                            </td>
+                            <td>
+                                <input ng-disabled="accessList.cost == 1" type="text" class="form-control" ng-model="ar.comment" validation-name="comment" validation-dynamically-defined="validations" />
+                            </td>
+                            <td>
+                                <button type="button" ng-disabled="accessList.cost == 1" class="btn btn-flat val-btn-remove" ng-click="removeAdvanceRequest()">
+                                    <span class="fa fa-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="text-bold pull-right">Итого: <b>{{totalAdvances()}}</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 pull-right">
+            <button type="button" class="btn btn-flat btn-info val-btn pull-right" ng-disabled="accessList.cost == 1" ng-click="addAdvanceRequest()">
+                <i class="fa fa-plus"></i> Добавить строку
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div ng-if="formData.approvalPath.length > 0">
+                <span class="text-muted">Маршрут согласования</span>
+                <ul>
+                    <li ng-repeat="path in formData.approvalPath track by $index" class="text-muted">{{path}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <a style="cursor: pointer;" class="val-text" ng-click="showHistory()">История изменения статуса</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pull-right val-btn-group-horizontal">
+            <button ng-hide="formData.actions[0] == 'Empty' " 
+                    ng-repeat="$action in formData.actions" type="button" class="btn btn-default" ng-click="save($action)"><span class="val-text">{{$action | uppercase}}</span></button>
+            <button type="button" class="btn btn-default" ng-click="goBack()">{{'Назад к списку'|uppercase}}</button>
+        </div>
+    </div>
+    <br />
+    <br />
+</form>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"> <!-- utf-8 works for most cases -->
+	<meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+	<title></title> 
+    <style type="text/css">
+
+        html,
+        body {
+            Margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
+        
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+                
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            Margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto; 
+        }
+        
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+        
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+        
+        .mobile-link--footer a,
+        a[x-apple-data-detectors] {
+            color:inherit !important;
+            text-decoration: underline !important;
+        }
+      
+    </style>
+    
+    <style>
+        
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+        .button-td:hover,
+        .button-a:hover {
+            background: #555555 !important;
+            border-color: #555555 !important;
+        }
+
+    </style>
+
+</head>
+<body width="100%" height="100%" bgcolor="#ffffff" style="Margin: 0;">
+	<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#ffffff" style="border-collapse:collapse;"><tr><td valign="top">
+		<center style="width: 100%;">
+			
+			<div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+			</div>
+			<br/>
+			<br/>
+			<img src="cid:logo.png"/>
+			<br/>
+			<br/>
+			<div style="background: #a03f9b; border-radius: 10px; width: 550px; height:auto; box-sizing: border-box; padding: 20px;">
+                <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 550px;">
+				<tr>
+					<td style="padding: 20px 0; text-align: left; width: 90%";>
+						<b><font color = "#ffffff" size="4">Просим согласовать заявку на аванс номер @Model.advanceNumber</font>&nbsp;&nbsp;<a color = "#ffffff" href="@Model.advanceUrl">Согласовать</a></b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 20px 0; text-align: left;">
+						<b><font color = "#ffffff" size="4">Список заявок на согласование вы можете посмотреть</font>&nbsp;&nbsp;<a color = "#ffffff" href="@Model.allUrl">Здесь</a></b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 20px 0; text-align: left">
+						<b><font color = "#ffffff" size="2">Служба технической поддержки @Model.serviceTel</font>&nbsp;&nbsp;<a href="mailto:@Model.serviceEmail">Служба подержки</a></b>
+					</td>
+				</tr>
+            </table>
+		</div>
+	</center>
+</table>
+</body>

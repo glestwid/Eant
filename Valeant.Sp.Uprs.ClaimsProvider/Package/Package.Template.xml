@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="d0f3f1f4-f90e-4677-8330-8b652818ca17" SharePointProductVersion="15.0">
+  <Assemblies>
+    <Assembly Location="Valeant.Sp.Uprs.Data.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Valeant.Sp.Uprs.ClaimsProvider.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Valeant.Sp.Uprs.ClaimsProvider_Feature1\Feature.xml" />
+  </FeatureManifests>
+</Solution>

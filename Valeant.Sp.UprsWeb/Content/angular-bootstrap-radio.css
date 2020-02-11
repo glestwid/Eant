@@ -1,0 +1,41 @@
+.ui-radio {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-right: 5px;
+  border-radius: 30px;
+}
+.ui-radio i.fa {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  font-size: 10px;
+    color: #adadad;
+}
+.ui-radio.large {
+  height: 23px;
+  width: 22px;
+}
+.ui-radio.large i.fa {
+  left: 4px;
+  top: 4px;
+  font-size: 14px;
+}
+.ui-radio.larger {
+  height: 33px;
+  width: 33px;
+}
+.ui-radio.larger i.fa {
+  left: 6px;
+  top: 5px;
+  font-size: 22px;
+}
+.ui-radio.largest {
+  height: 44px;
+  width: 44px;
+}
+.ui-radio.largest i.fa {
+  left: 8px;
+  top: 7px;
+  font-size: 30px;
+}

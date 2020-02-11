@@ -1,0 +1,38 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Редактирование</h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th>Сотрудник</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="row.FullName" ng-disabled="true" />
+                    </div>
+                </td>
+            </tr>
+           
+            <tr>
+                <th>Номер карты</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="row.FuelCard" />
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Закрыть и сохранить</button>
+    </div>
+</div>
+<style>
+    .modal-dialog {
+        width: 45%;
+    }
+</style>

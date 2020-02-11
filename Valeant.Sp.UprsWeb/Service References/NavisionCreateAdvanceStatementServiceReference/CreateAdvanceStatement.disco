@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost/NavisionTest/CreateAdvanceStatement.asmx?wsdl" docRef="http://localhost/NavisionTest/CreateAdvanceStatement.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost/NavisionTest/CreateAdvanceStatement.asmx" xmlns:q1="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" binding="q1:SPIntegration_Binding" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost/NavisionTest/CreateAdvanceStatement.asmx" xmlns:q2="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" binding="q2:SPIntegration_Binding1" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

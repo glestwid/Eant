@@ -1,0 +1,129 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Подарок</h4>
+    </div>
+    <div class="modal-body">
+        <form name="formGift">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Заявка на подарок</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <select selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-model="formData.giftRequest" class="form-control" data-container="body"
+                                ng-options="item as (item.Number + ' от '  + (item.Date | date : 'dd.MM.yyyy')) for item in giftRequests track by item.Id"
+                                ng-change="updateGiftForm(formData.giftRequest)"
+                                data-size="10" title="Выберите заявку..." validation-name="name" validation-dynamically-defined="validations">
+                            <option data-hidden="true"></option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left">Название подарка</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" placeholder="..." rows="3" ng-model="formData.description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left">Причина вручения</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" placeholder="..." rows="3" ng-model="formData.reason"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Стоимость, руб</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <input ng-focus="inputFocus(formData.sum)" ng-blur="inputBlur(formData.sum)" ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$" type="text" class="form-control" ng-model="formData.sum" validation-name="sum" validation-dynamically-defined="validations" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Дата вручения</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <div class="has-feedback single-datepicker">
+                            <input date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="formData.date" validation-name="name" validation-dynamically-defined="validations"/>
+                            <i class="fa fa-calendar form-control-feedback"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12 nopadding">
+                    <div class="panel panel-default val-panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="form-inline col-lg-12">
+                                    <h4 class="col-lg-12 val-text">Данные получателя подарка</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div name="formTrip" class="panel-body table-responsive">
+                            <!--<div class="form-group input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                            </div>-->
+                            <div class="col-lg-7 col-lg-offset-5">
+                                <div class="form-group input-group">
+                                    <select ng-disabled="true" class="form-control" ng-model="formData.giftReciever" selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-options="(gr.SecondName + ' ' + gr.Name + ' ' + gr.MiddleName) for gr in giftModalData track by gr.Id"
+                                            data-size="10" data-container="body" title="Выберите получателя...">
+                                        <option data-hidden="true"></option>
+                                    </select>
+                                    <span class="input-group-btn"><button ng-disabled="true" ng-click="addGiftReciever()" class="btn  btn-default" type="button"><i class="fa fa-plus"></i></button></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span>{{formData.giftReciever.SecondName + ' ' + formData.giftReciever.Name + ' ' + formData.giftReciever.MiddleName}}</span><br/>
+                                <span>{{formData.giftReciever.Organization}}</span><br />
+                                <span>{{formData.giftReciever.Position}}</span><br/>
+                                <hr/>
+                                <span class="text-bold">Подтверждаю, что Данное лицо <span style="text-decoration: underline">не является</span> медицинским/ фармацевтическим работником или должностным лицом,
+                                попадающим под действие Закона США О противодействии зарубежной коррупционной практики Конвенции ОЭСР</span>
+                            </div>
+                            <div class="col-lg-12">
+                                <h5 class="col-lg-12 val-text pull-left">Информация о подарках за последние 12 месяцев</h5>
+                                <table class="table table-bordered table-hover val-table ">
+                                    <thead>
+                                        <tr>
+                                            <th>Дата</th>
+                                            <th>Подарок</th>
+                                            <th>Сумма подарка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="g in gifts track by $index">
+                                        <tr>
+                                            <td width="100px">{{g.giftDate | date : "dd.MM.yyyy"}}</td>
+                                            <td>{{g.description}}</td>
+                                            <td width="50px">{{g.sum}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <div class="panel-footer">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Сохранить</button>
+    </div>
+</div>
+<style>
+    .modal-dialog {
+        width: 40%;
+    }
+</style>

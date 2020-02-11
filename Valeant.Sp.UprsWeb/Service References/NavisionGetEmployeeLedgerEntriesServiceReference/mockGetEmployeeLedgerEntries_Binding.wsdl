@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soaphttp="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries" targetNamespace="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Entry_Type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Initial_Entry" />
+          <xsd:enumeration value="Application" />
+          <xsd:enumeration value="Unrealized_Loss" />
+          <xsd:enumeration value="Unrealized_Gain" />
+          <xsd:enumeration value="Realized_Loss" />
+          <xsd:enumeration value="Realized_Gain" />
+          <xsd:enumeration value="Payment_Discount" />
+          <xsd:enumeration value="Payment_Discount_VAT_Excl" />
+          <xsd:enumeration value="Payment_Discount_VAT_Adjustment" />
+          <xsd:enumeration value="Appln_Rounding" />
+          <xsd:enumeration value="Correction_of_Remaining_Amount" />
+          <xsd:enumeration value="Payment_Tolerance" />
+          <xsd:enumeration value="Payment_Discount_Tolerance" />
+          <xsd:enumeration value="Payment_Tolerance_VAT_Excl" />
+          <xsd:enumeration value="Payment_Tolerance_VAT_Adjustment" />
+          <xsd:enumeration value="Payment_Discount_Tolerance_VAT_Excl" />
+          <xsd:enumeration value="Payment_Discount_Tolerance_VAT_Adjustment" />
+          <xsd:enumeration value="US_GAAP_Unrealized_Loss" />
+          <xsd:enumeration value="US_GAAP_Unrealized_Gain" />
+          <xsd:enumeration value="US_GAAP_Realized_Loss" />
+          <xsd:enumeration value="US_GAAP_Realized_Gain" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Document_Type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Payment" />
+          <xsd:enumeration value="Invoice" />
+          <xsd:enumeration value="Credit_Memo" />
+          <xsd:enumeration value="Finance_Charge_Memo" />
+          <xsd:enumeration value="Reminder" />
+          <xsd:enumeration value="Refund" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="GetEmployeeLedgerEntries">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Entry_No" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Posting_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vleDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vlePaymPurp" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vendor_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vendor_Ledger_Entry_No" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vendor_Posting_Group" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Entry_Type" type="tns:Entry_Type" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Document_Type" type="tns:Document_Type" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Document_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Amount_LCY" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Applied_Vend_Ledger_Entry_No" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Unapplied" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Unapplied_by_Entry_No" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetEmployeeLedgerEntries_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="GetEmployeeLedgerEntries" type="tns:GetEmployeeLedgerEntries" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="GetEmployeeLedgerEntries_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Entry_No" />
+          <xsd:enumeration value="Posting_Date" />
+          <xsd:enumeration value="vleDescription" />
+          <xsd:enumeration value="vlePaymPurp" />
+          <xsd:enumeration value="Vendor_No" />
+          <xsd:enumeration value="Vendor_Ledger_Entry_No" />
+          <xsd:enumeration value="Vendor_Posting_Group" />
+          <xsd:enumeration value="Entry_Type" />
+          <xsd:enumeration value="Document_Type" />
+          <xsd:enumeration value="Document_No" />
+          <xsd:enumeration value="Amount_LCY" />
+          <xsd:enumeration value="Applied_Vend_Ledger_Entry_No" />
+          <xsd:enumeration value="Unapplied" />
+          <xsd:enumeration value="Unapplied_by_Entry_No" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="GetEmployeeLedgerEntries_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:GetEmployeeLedgerEntries_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Entry_No" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="GetEmployeeLedgerEntries" type="tns:GetEmployeeLedgerEntries" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="GetEmployeeLedgerEntries" type="tns:GetEmployeeLedgerEntries" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:GetEmployeeLedgerEntries_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:GetEmployeeLedgerEntries_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <portType name="GetEmployeeLedgerEntries_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+  </portType>
+  <binding name="GetEmployeeLedgerEntries_Binding" type="tns:GetEmployeeLedgerEntries_Port">
+    <soaphttp:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Read">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries:Read" style="document" />
+      <input name="Read">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="Read_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries:ReadByRecId" style="document" />
+      <input name="ReadByRecId">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries:ReadMultiple" style="document" />
+      <input name="ReadMultiple">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries:IsUpdated" style="document" />
+      <input name="IsUpdated">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="IsUpdated_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getemployeeledgerentries:GetRecIdFromKey" style="document" />
+      <input name="GetRecIdFromKey">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="GetEmployeeLedgerEntries_Service">
+    <port name="GetEmployeeLedgerEntries_Port" binding="tns:GetEmployeeLedgerEntries_Binding">
+      <soaphttp:address location="http://DMITRY-MOBILE:8088/mockGetEmployeeLedgerEntries_Binding" />
+    </port>
+  </service>
+</definitions>

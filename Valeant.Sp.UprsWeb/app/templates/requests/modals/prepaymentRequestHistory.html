@@ -1,0 +1,37 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">История заявки</h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-responsive table-hover">
+            <tbody>
+                <tr ng-repeat="m in historyItems track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{m.Id}}</td>
+                    <td>{{m.CreateDate | date : "dd.MM.yyyy HH:mm"}}</td>
+                    <td>{{m.Initiator}}</td>
+                    <td>
+                        <span>{{m.Message}}</span>
+                    </td>
+                    <td>
+                        <span style="word-wrap: break-word; width: 300px;display: block">{{m.Comment}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="export()">Печать</button>
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Закрыть</button>
+
+    </div>
+</div>
+<style>
+    .modal-dialog {
+        width: 65%;
+    }
+</style>
+        

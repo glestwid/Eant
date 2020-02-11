@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:i0="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" location="http://localhost/NavisionTest/CreateAdvanceStatement.asmx?wsdl=wsdl1" />
+  <wsdl:types>
+    <s:schema targetNamespace="http://tempuri.org/">
+      <s:import schemaLocation="http://localhost/NavisionTest/CreateAdvanceStatement.asmx?schema=schema1" namespace="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:service name="CreateAdvanceStatement">
+    <wsdl:port name="SPIntegration_Binding" binding="i0:SPIntegration_Binding">
+      <soap:address location="http://localhost/NavisionTest/CreateAdvanceStatement.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SPIntegration_Binding1" binding="i0:SPIntegration_Binding1">
+      <soap12:address location="http://localhost/NavisionTest/CreateAdvanceStatement.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

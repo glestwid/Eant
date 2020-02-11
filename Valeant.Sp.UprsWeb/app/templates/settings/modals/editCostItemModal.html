@@ -1,0 +1,120 @@
+﻿<div class="modal-content modal-lg">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{row.IsNew ? 'Добавление' : 'Редактирование'}}</h4>
+    </div>
+    <div class="modal-body">
+        <form name="form">
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th width="33%">Название</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="row.Title" validation-name="required" validation-dynamically-defined="validations"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Тип документов</th>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="documentCheckboxes.prepayment" ng-change="changeDocumentBelonging(1)"> Заявка на аванс
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="documentCheckboxes.trip" ng-change="changeDocumentBelonging(4)"> Авансовый отчет / Поездка
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="documentCheckboxes.representative" ng-change="changeDocumentBelonging(5)"> Авансовый отчет / Представительские
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Согласующий</th>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" selectpicker
+                                ng-model="row.ApproverRoleId"
+                                ng-options="item.Id as item.Name for item in roles"
+                                title="Выберите роль согласующего...">
+                            <option data-hidden="true"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Код группового лимита</th>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" ng-model="row.GroupLimitCode" validation-name="required" validation-dynamically-defined="validations"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Учетная группа (кредит)</th>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" selectpicker validation-name="required" validation-dynamically-defined="validations"
+                                ng-model="row.CreditGroupId"
+                                ng-options="item.Id as item.AccountGroupName for item in accountGroups"
+                                title="Выберите учетную группу...">
+                            <option data-hidden="true"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Бухгалтерский счет (дебет) 1 группа кост-центров</th>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" selectpicker
+                                ng-options="item.AccountName for item in accounts track by item.Id"
+                                ng-model="row.Group1AccountId"
+                                title="Выберите счет...">
+                            <option data-hidden="true"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Бухгалтерский счет (дебет) 2 группа кост-центров</th>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" selectpicker
+                                ng-options="item.AccountName for item in accounts track by item.Id"
+                                ng-model="row.Group2AccountId"
+                                title="Выберите счет...">
+                            <option data-hidden="true"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Лимиты</th>
+                <td>
+                    <table class="table table-responsive">
+                        <tr ng-repeat="lim in row.Limits">
+                            <th>Группа {{lim.PositionGroup}}</th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ng-model="lim.Limit" validation-name="required" validation-dynamically-defined="validations"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+            </form>
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Закрыть и сохранить</button>
+    </div>
+</div>

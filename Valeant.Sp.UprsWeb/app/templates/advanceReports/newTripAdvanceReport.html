@@ -1,0 +1,352 @@
+﻿<div name="form" class="col-lg-12">
+    <div class="row col-lg-12">
+        <div class="col-lg-10">
+            <h5 class="help-block">Отчёты / Новый отчёт по командировке</h5>
+        </div>
+        <!--<div class="col-lg-2">
+            <button type="button" class="btn btn-default pull-right" ng-click="print()" ng-if="action.indexOf('Создать') == -1">
+                <span class="val-text">{{'Печать'|uppercase}}</span>
+            </button>
+        </div>-->
+    </div>
+    <div class="row col-lg-12">
+        <h3 class="val-text">Авансовый отчёт по командировке/служебной поездке {{formData.number ? '№' + formData.number : ''}}</h3>
+
+        <div class="pull-right dropdown val-dropdown">
+            <button class="btn btn-default dropdown-toggle col-lg-12" type="button" data-toggle="dropdown">
+                {{'Печать' | uppercase}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a ng-click="printMemo(formData)">{{'Служебная записка' | uppercase}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <hr />
+    </div>
+    <!-- Заголовок -->
+    <form name="formHeader" class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted">
+                            <p class="pull-left val-asterisk">Дата отчёта</p>
+                        </span>
+                        <div class="col-lg-8">
+                            <div class="has-feedback single-datepicker">
+                                <input ng-disabled="accessList.formHeader == 1" date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="formData.reportMainData.date" />
+                                <i class="fa fa-calendar form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted">
+                            <p class="pull-left">Отчёт по заявке</p>
+                        </span>
+                        <div class="col-lg-8">
+                            <p ng-show="accessList.formHeader == 1">{{formData.reportMainData.tripRequest.Number}} от {{formData.reportMainData.tripRequest.FromDate | date : 'dd.MM.yyyy'}}</p>
+                            <div ng-show="accessList.formHeader == 2">
+                                <select class="form-control" ng-model="formData.reportMainData.tripRequest" selectpicker
+                                        ng-change="tripRequestChanged()"
+                                        ng-options="item as (item.Number + ' от ' + (item.FromDate | date : 'dd.MM.yyyy')) for item in tripRequests track by item.Id" title="Выберите заявку на поездку">
+                                    <option data-hidden="true"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted ">
+                            <p class="pull-left val-asterisk">Тип поездки</p>
+                        </span>
+                        <div class="col-lg-8">
+                            {{formData.reportMainData.tripType}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted">
+                            <p class="pull-left val-asterisk">На служебном автомобиле</p>
+                        </span>
+                        <div class="col-lg-8">
+                            <div class="checkbox">
+                                <checkbox ng-disabled="true" ng-model="formData.reportMainData.serviceVehicle"></checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted">
+                            <p class="pull-left">Комментарий к отчёту</p>
+                        </span>
+                        <div class="col-lg-8">
+                            <textarea ng-disabled="accessList.formHeader == 1" class="form-control" placeholder="..." rows="4" ng-model="formData.reportMainData.comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-lg-5">
+                <form>
+                    <div class="form-group">
+                        <span class="col-lg-4 control-label text-muted">
+                            <p class="pull-left val-asterisk">Отчёт для</p>
+                        </span>
+                        <div class="col-lg-8">
+                            <select ng-disabled="true" class="form-control" ng-model="formData.reportMainData.person" selectpicker ng-options="item.FullName for item in persons track by item.Id" title="Выберите сотрудника..." data-size="10">
+                                <option data-hidden="true"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="container-fluid">
+                            <div class="jumbotron col-lg-12">
+                                <div class="col-lg-12 text-muted">
+                                    <span>ФИО: </span>
+                                    <span>{{formData.reportMainData.person.FullName}}</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Должность: </span>
+                                    <span>{{formData.reportMainData.person.Position}}</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Отдел: </span>
+                                    <span>{{formData.reportMainData.person.DepartmentName}}</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Cost-центр: </span>
+                                    <span>{{formData.reportMainData.person.CostcenterCode}}</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Телефон: </span>
+                                    <span>{{formData.reportMainData.person.Tel}}&nbsp; </span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>E-mail: </span>
+                                    <span>{{formData.reportMainData.person.Email}}</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Паспорт: </span>
+                                    <span>Серия: {{formData.reportMainData.person.Passport.DocumentSeries}}, номер: {{formData.reportMainData.person.Passport.DocumentNumber}}, выдан: {{formData.reportMainData.person.Passport.DocumentIssuedBy}} {{formData.reportMainData.person.Passport.DocumentIssuedOn | date: "dd.MM.yyyy"}}г.</span>
+                                </div>
+                                <div class="col-lg-12 text-muted">
+                                    <span>Загранпаспорт: </span>
+                                    <span>№{{formData.reportMainData.person.InternationalPassport.Number}}, {{formData.reportMainData.person.InternationalPassport.FirstName}} {{formData.reportMainData.person.InternationalPassport.LastName}}, до {{formData.reportMainData.person.InternationalPassport.ExpiryDate | date: "dd.MM.yyyy"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+
+    <div class="row col-lg-12 nopadding">
+        <div class="panel panel-default val-panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="form-inline col-lg-12">
+                        <h3 class="col-lg-12 val-text">Расходы</h3>
+                    </div>
+                </div>
+
+            </div>
+            <form name="formTrip" class="panel-body table-responsive nopadding">
+                <table class="table table-bordered table-hover val-table ext-table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Тип документа</th>
+                            <th>Статья расходов</th>
+                            <th>Учётная группа</th>
+                            <th>Дата</th>
+                            <th>№ документа</th>
+                            <th>Сумма</th>
+                            <th>Документ отсутствует</th>
+                            <th>Фискальный</th>
+                            <th ng-show="accessList.ReportCost != 3">Счёт дебет</th>
+                            <th ng-show="accessList.ReportCost != 3">Счёт кредит</th>
+                            <th>Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="d in formData.tripCostsData.rows track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td width="150px">
+                                <select ng-disabled="accessList.ReportTrip == 1" selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-model="d.documentType" class="form-control" data-container="body" ng-options="item as item.Name for item in tripReportData.documentTypes track by item.Id" data-size="10" title="Выберите тип документа..." validation-name="selectInputField" validation-dynamically-defined="validations">
+                                    <option data-hidden="true"></option>
+                                </select>
+                            </td>
+                            <td width="150px">
+                                <select ng-disabled="accessList.ReportTrip == 1" selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-model="d.costItem" class="form-control" data-container="body" ng-options="item as item.Name disable when (item.IsActive !== true) for item in costItems track by item.Id" data-size="10" title="Выберите статью расходов..." validation-name="selectInputField" validation-dynamically-defined="validations">
+                                    <option data-hidden="true"></option>
+                                </select>
+                            </td>
+                            <td width="150px">
+                                <select ng-disabled="accessList.ReportTrip == 1" selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-model="d.accountGroup" class="form-control" data-container="body" ng-options="item as item.AccountGroupName for item in tripReportData.accountGroups track by item.Id" data-size="10" title="Выберите учётную группу..." validation-name="selectInputField" validation-dynamically-defined="validations">
+                                    <option data-hidden="true"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="form-group has-feedback single-datepicker">
+                                    <input ng-disabled="accessList.ReportTrip == 1" date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="d.date" validation-name="date" validation-dynamically-defined="validations"/>
+                                    <i class="fa fa-calendar form-control-feedback"></i>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" ng-disabled="accessList.ReportTrip == 1" ng-model="d.documentNumber"  class="form-control" validation-name="selectInputField" validation-dynamically-defined="validations"/>
+                            </td>
+                            <td>
+                                <input ng-focus="inputFocus(d)" ng-blur="inputBlur(d)" ng-disabled="accessList.ReportTrip == 1" ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$" type="text" class="form-control" model-to-fixed="2" ng-model="d.sum" validation-name="sum" validation-dynamically-defined="validations" />
+                                <span class="text-bold pull-right" ng-class="'text-danger'" ng-show="d.sum > d.costItem.Limit">Превышен лимит ({{d.costItem.Limit}})</span>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <checkbox ng-model="d.absence" ng-disabled="accessList.ReportTrip == 1"></checkbox>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <checkbox ng-model="d.fiscal" ng-disabled="accessList.ReportTrip == 1"></checkbox>
+                                </div>
+                            </td>
+                            <td ng-show="accessList.ReportCost != 3">
+                                <input type="text" ng-disabled="accessList.ReportTrip == 1" ng-model="d.debit"  class="form-control" />
+                            </td>
+                            <td ng-show="accessList.ReportCost != 3">
+                                <input type="text" ng-disabled="accessList.ReportTrip == 1" ng-model="d.credit"  class="form-control" />
+                            </td>
+                            <td ng-show="accessList.ReportCost != 3" width="160px">
+                                <div class="btn-group full-width val-dropdown-default" uib-dropdown dropdown-append-to-body>
+                                    <button type="button" ng-disabled="accessList.ReportTrip == 1" class="btn btn-default" uib-dropdown-toggle>
+                                        Выберите...
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu val-dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                                        <li>
+                                            <a style="cursor: pointer;" ng-disabled="accessList.ReportTrip == 1" ng-click="applyAction('Удалить')" class="ng-binding">Удалить</a>
+                                        </li>
+                                        <li >
+                                            <a style="cursor: pointer;" ng-disabled="accessList.ReportTrip == 1" ng-click="applyAction('Разделить')" class="ng-binding">Разделить</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td ng-show="accessList.ReportCost == 3">
+                                <button type="button" class="btn btn-flat val-btn-remove" ng-disabled="accessList.ReportTrip == 1" ng-click="applyAction('Удалить')">
+                                    <span class="fa fa-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="text-bold pull-left">Итого по отчёту: <b>{{totalTripCost() | toFixed:2}}</b></span>
+                    </div>
+                    <div class="col-lg-12 pull-right">
+                        <button type="button" class="btn btn-flat btn-info val-btn pull-right" ng-disabled="accessList.ReportTrip == 1" ng-click="addTripCost()">
+                            <i class="fa fa-plus"></i> Добавить строку
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-lg-12 pull-right">
+            <button type="button" class="btn btn-flat btn-info val-btn pull-right" ng-disabled="accessList.advanceRequestsData == 1" ng-click="addTripCost()">
+                <i class="fa fa-plus"></i> Добавить строку
+            </button>
+        </div>
+    </div>-->
+    
+    <!-- Сканы -->
+    <div class="row col-lg-12 nopadding">
+        <div class="panel panel-default val-panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="form-inline col-lg-4">
+                        <div class="form-group">
+                            <h4 class="col-lg-12 val-text">Файлы с отсканированными образами документов</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-inline col-lg-12 pull-left">
+                            <div class="col-lg-2">
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control upload-file-info" placeholder="Выберите документ..." ng-model="selectedFile.name" ng-disabled="accessList.ReportTrip == 1">
+                                    <span class="input-group-btn">
+                                        <button ng-disabled="accessList.ReportTrip == 1" class="btn btn-default" type="button" onclick="document.getElementById('scanFileInput').click();">
+                                            <i class="fa fa-folder-open-o" style="cursor:pointer"></i>
+                                        </button>
+                                        <input type="file"
+                                               style="display:none;"
+                                               name="file_source" size="40"
+                                               fileread="selectedFile" id="scanFileInput" />
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button type="button" ng-disabled="accessList.ReportTrip == 1" class="btn btn-flat btn-info val-btn col-lg-1" ng-click="addScanPdf();" style="z-index:10"> Добавить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive no-padding">
+                <table class="table table-bordered table-hover val-table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Наименование документа</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="s in formData.scanPdfsData.rows track by $index">
+                            <td width="5%"><span>{{$index + 1}}</span></td>
+                            <td class="text-left">
+                                <a ng-if="s.url != undefined" class="val-text" ng-bind="s.name" href="{{s.url}}" target="_blank">{{s.name}}</a>
+                                <span ng-if="s.url == undefined" ng-bind="s.name">{{s.name}}</span>
+                            </td>
+                            <td width="30px">
+                                <button class="btn btn-flat val-btn-remove" ng-click="removeScanPdf()">
+                                    <span class="fa fa-remove"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <!-- Маршрут согласования -->
+<div class="row">
+    <div class="col-lg-5">
+        <div ng-if="formData.approvalPath.length > 0">
+            <span class="text-muted">Маршрут согласования</span>
+            <ul>
+                <li ng-repeat="path in formData.approvalPath track by $index" class="text-muted">{{path}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <a style="cursor: pointer;" class="val-text" ng-click="showHistory()">История изменения статуса</a>
+    </div>
+</div>
+    <div class="row">
+        <div class="pull-right val-btn-group-horizontal">
+            <button ng-hide="formData.actions[0] == 'Empty' "
+                    ng-repeat="$action in formData.actions" type="button" class="btn btn-default" ng-click="save($action)">
+                <span class="val-text">{{$action | uppercase}}</span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="goBack()">{{'Назад к списку'|uppercase}}</button>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>

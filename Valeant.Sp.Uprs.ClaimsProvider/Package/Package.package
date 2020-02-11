@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="1d45663a-10e3-455d-8f44-833121b14c4b" solutionId="1d45663a-10e3-455d-8f44-833121b14c4b" resetWebServer="false" sharePointProductVersion="15.0" name="Valeant.Sp.Uprs.ClaimsProvider" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="Valeant.Sp.Uprs.Data.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Valeant.Sp.Uprs.Data\bin\Debug\Valeant.Sp.Uprs.Data.dll" />
+  </assemblies>
+  <features>
+    <featureReference itemId="a9496329-1f46-4a91-babc-41c2410cd68b" />
+  </features>
+</package>

@@ -1,0 +1,63 @@
+﻿<div class="row col-lg-12">
+
+    <div class="panel panel-default val-panel">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="col-lg-4 val-text nopadding">Заявки на аванс</h3>
+                <div class="col-lg-5 pull-right">
+                    <div class="pull-right">
+                        <select selectpicker ng-model="selectedStatusCriteria" ng-change="reload()">
+                            <option ng-repeat="c in requestStatuses">{{c}}</option>
+                        </select>
+                        <select selectpicker ng-model="selectedDateRangeCriteria" ng-change="reload()">
+                            <option ng-repeat="c in ['Месяц', 'Квартал', 'Год', 'Все']">{{c}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-5 padding-left-0">
+                    <input type="text" class="form-control" ng-model="searchFilter"
+                           placeholder="Введите номер заявки"
+                           ng-pattern-restrict pattern="^(\d*)$"
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="reload()" />
+                </div>
+                <button class="btn btn-primary val-btn" ng-click="reload()">Найти заявку</button>
+                <button class="btn btn-primary val-btn margin-right-15 pull-right" ng-click="createNew()">Создать новую заявку</button>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <div ui-if="gridOptions.data.length > 0" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize class="grid" ng-style="{height: gridOptions.appScopeProvider.getGridHeight()}"></div>
+        </div>
+        <!--<div class="table-responsive">
+            <table class="table table-bordered table-hover val-table">
+
+                <thead>
+                    <tr>
+                        <th>№ заявки</th>
+                        <th>Дата заявки</th>
+                        <th>Тип заявки</th>
+                        <th>Сумма</th>
+                        <th>Статус</th>
+                        <th width="180px"></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="$data in reports">
+                    <tr>
+                        <td ng-click="open($data)">{{$data.Number}}</td>
+                        <td ng-click="open($data)">{{$data.Date | date : "dd.MM.yyyy"}}</td>
+                        <td ng-click="open($data)">{{$data.Type}}</td>
+                        <td ng-click="open($data)">{{$data.Sum}}</td>
+                        <td ng-click="open($data)">{{$data.Status}}</td>
+                        <td class="text-center">
+                            <a style="cursor: pointer;" class="val-text" ng-click="showHistory($data)">История</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>-->
+    </div>
+</div>

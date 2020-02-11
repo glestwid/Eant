@@ -1,0 +1,436 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Valeant.Sp.UprsWeb.Controllers.Entities;
+
+namespace Valeant.Sp.UprsWeb.Controllers
+{
+    public class StaticData
+    {
+        private static readonly List<TravelListData> TravelListsData = new List<TravelListData>();
+        private static readonly List<ApprovalData> ApprovalData = new List<ApprovalData>();
+        private static readonly Dictionary<Int64, TripRequestDataEx> TripRequestDataEx = new Dictionary<Int64, TripRequestDataEx>();
+        private static readonly Dictionary<Int64, AdvanceReportDataEx> AdvanceReportDataEx = new Dictionary<Int64, AdvanceReportDataEx>();
+
+        public static List<PersonReference> PersonReferences = new List<PersonReference>();
+        public static List<CountryReference> CountryReferences = new List<CountryReference>();
+        public static List<VehicleTypeReference> VehicleTypeReferences = new List<VehicleTypeReference>();
+        public static List<TripAimReference> TripAimReferences = new List<TripAimReference>();
+        public static List<TripTypeReference> TripTypeReferences = new List<TripTypeReference>();
+        public static List<OwnExpenseOptionReference> OwnExpenseOptionReferences =new List<OwnExpenseOptionReference>();
+        public static List<CityReference> CityReferences = new List<CityReference>();
+        public static List<HotelReference> HotelReferences = new List<HotelReference>();
+        public static List<CostItemReference> CostItemReferences = new List<CostItemReference>();
+
+        public static void Seed()
+        {
+            TravelListsData.AddRange(new List<TravelListData>
+            {
+                new TravelListData
+                {
+                    Number = 0012,
+                    Date = DateTime.Parse("03.08.2015"),
+                    Car = "а777аа777",
+                    Sum = 3200,
+                    IsApproved = true
+                },
+                new TravelListData
+                {
+                    Number = 0013,
+                    Date = DateTime.Parse("06.11.2015"),
+                    Car = "а332аа45",
+                    Sum = 1200,
+                    IsApproved = false
+                }
+            });
+
+            ApprovalData.AddRange(new List<ApprovalData>
+            {
+                new ApprovalData
+                {
+                    Number = 0116,
+                    Date = DateTime.Parse("01.10.2015"),
+                    Type = "Заявка на поездку",
+                    Person = "Михаил Собакевич",
+                    Division = "Дирекция",
+                    IsApproved = true
+                }
+            });
+
+            PersonReferences.AddRange(new List<PersonReference>
+            {
+                new PersonReference
+                {
+                    Id = 1,
+                    Fio = "Константинопольский Константин константинович",
+                    Position = "Региональный представитель/ Департамент развития",
+                    CostCenter = "RUS_PH",
+                    Tel = "+7 987 789-34-78",
+                    Email = "tafrooots@gmail.com",
+                    Passport = "6879 678465, выдан 01.01.2000 по р-ну Коньково ОУФМС РФ",
+                    TravellingPassport = "KONSTANTINOPOLSKII KONSTANTIN 465 7890789, действителен до 01.01.2018, место рождения MOSCOW RUSSIA",
+                },
+                new PersonReference
+                {
+                    Id = 2,
+                    Fio = "Тафров Вадим Сергеевич",
+                    Position = "Software developer",
+                    CostCenter = "rus xerox",
+                    Tel = "+7 985 111 22 22",
+                    Email = "tafrov.vadim@gmail.com",
+                    Passport = "1111 2223333, выдан 01.01.2000 по р-ну Коньково ОУФМС РФ",
+                    TravellingPassport = "TAFROV VADIM 465 7890789, действителен до 01.01.2018, место рождения MOSCOW RUSSIA",
+                }
+            });
+
+
+            CountryReferences.AddRange(new List<CountryReference>
+            {
+                new CountryReference
+                {
+                    Id = 1,
+                    Name = "Россия",
+                    IsForeign = false
+                },
+                new CountryReference
+                {
+                    Id = 2,
+                    Name = "Казахстан",
+                    IsForeign = true
+                },
+                new CountryReference
+                {
+                    Id = 3,
+                    Name = "Бангладеш",
+                    IsForeign = true
+                }
+            });
+
+            VehicleTypeReferences.AddRange(new List<VehicleTypeReference>
+            {
+                new VehicleTypeReference
+                {
+                    Id = 1,
+                    Name = "Автомобиль"
+                },
+                new VehicleTypeReference
+                {
+                    Id = 2,
+                    Name = "Поезд"
+                },
+                new VehicleTypeReference
+                {
+                    Id = 3,
+                    Name = "Пехом"
+                }
+            });
+
+            TripAimReferences.AddRange(new List<TripAimReference>
+            {
+                new TripAimReference
+                {
+                    Id = 1,
+                    Name = "Встреча с заказчиком"
+                },
+                new TripAimReference
+                {
+                    Id = 2,
+                    Name = "Сервисный вызов"
+                }
+            });
+
+            TripTypeReferences.AddRange(new List<TripTypeReference>
+            {
+                new TripTypeReference
+                {
+                    Id = 1,
+                    Name = "Служебная поездка"
+                },
+                new TripTypeReference
+                {
+                    Id = 2,
+                    Name = "Командировка"
+                }
+            });
+
+            OwnExpenseOptionReferences.AddRange(new List<OwnExpenseOptionReference>
+            {
+                new OwnExpenseOptionReference
+                {
+                    Id = 1,
+                    Name = "До поездки"
+                },
+                new OwnExpenseOptionReference
+                {
+                    Id = 2,
+                    Name = "После поездки"
+                }
+            });
+
+            CityReferences.AddRange(new List<CityReference>
+            {
+                new CityReference
+                {
+                    Id = 1,
+                    Name = "Москва",
+                    CountryId = 1
+                },
+                new CityReference
+                {
+                    Id = 2,
+                    Name = "Астана",
+                    CountryId = 2
+                },
+                new CityReference
+                {
+                    Id = 3,
+                    Name = "Дакка",
+                    CountryId = 3
+                }
+            });
+
+            HotelReferences.AddRange(new List<HotelReference>
+            {
+                new HotelReference
+                {
+                    Id = 1,
+                    Name = "Hilton"
+                },
+                new HotelReference
+                {
+                    Id = 2,
+                    Name = "Дом у Дороги"
+                },
+                new HotelReference
+                {
+                    Id = 3,
+                    Name = "Транзит"
+                },
+                new HotelReference
+                {
+                    Id = 4,
+                    Name = "У Светланы"
+                },
+            });
+
+            CostItemReferences.AddRange(new List<CostItemReference>
+            {
+                new CostItemReference
+                {
+                    Id = 1,
+                    Name = "Мойка автомобиля"
+                },
+                new CostItemReference
+                {
+                    Id = 2,
+                    Name = "Поход в кино"
+                }
+            });
+        }
+
+        public static IEnumerable<AdvanceReportData> GetAdvanceReportData()
+        {
+            var res = AdvanceReportDataEx.Values.Select(x => new AdvanceReportData
+            {
+                Id = x.Id,
+                Number = x.Number,
+                Date = x.AdvanceRequestsData.Options.AdvanceDate,
+                Type = "тест тип",
+                Sum = x.AdvanceRequestsData.Options.Sum,
+                Status = x.Status
+            });
+
+            return res;
+        }
+
+        public static AdvanceReportDataEx GetAdvanceReportData(Int64 id)
+        {
+            var res = AdvanceReportDataEx.Single(x => x.Key == id);
+            return res.Value;
+        }
+
+        public static IEnumerable<TravelListData> GetTravelListsData()
+        {
+            return TravelListsData;
+        }
+
+        public static IEnumerable<ApprovalData> GetApprovalData()
+        {
+            return ApprovalData;
+        }
+
+        public static IEnumerable<TripRequestData> GetTripRequestsData()
+        {
+            var res = TripRequestDataEx.Values.Select(x => new TripRequestData
+            {
+                Id = x.Id,
+                Number = x.MainData.Number,
+                FromDate = x.MainData.FromDate,
+                DocumentType = "тестовый тип",
+                Sum = 14144400,
+                Status = x.Status
+            });
+
+            return res;
+        }
+
+        public static IEnumerable<RequestHistoryData> GetRequestHistory()
+        {
+            return Enumerable.Range(0, 15).Select(u => new RequestHistoryData() { Number = u, CreateDate = DateTime.Now, Initiator = "FIO",
+                Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " });
+        }
+
+        public static TripRequestDataEx GetTripRequestsData(Int64 id)
+        {
+            var res = TripRequestDataEx.Single(x => x.Key == id);
+            return res.Value;
+        }
+
+        public static IEnumerable<PersonReference> GetPersonData()
+        {
+            return PersonReferences;
+        }
+
+        public static IEnumerable<CountryReference> GetCountryData()
+        {
+            return CountryReferences;
+        }
+
+        public static IEnumerable<VehicleTypeReference> GetVehicleData()
+        {
+            return VehicleTypeReferences;
+        }
+
+        public static IEnumerable<TripAimReference> GetTripAimData()
+        {
+            return TripAimReferences;
+        }
+
+
+        public static IEnumerable<TripTypeReference> GetTripTypeData()
+        {
+            return TripTypeReferences;
+        }
+
+
+        public static IEnumerable<CityReference> GetCityData()
+        {
+            return CityReferences;
+        }
+
+        public static IEnumerable<HotelReference> GetHotelData()
+        {
+            return HotelReferences;
+        }
+        
+        public static IEnumerable<OwnExpenseOptionReference> GetOwnExpenseOptionsData()
+        {
+            return OwnExpenseOptionReferences;
+        }
+
+        public static IEnumerable<CostItemReference> GetCostItemData()
+        {
+            return CostItemReferences;
+        }
+
+
+        public static bool SaveTripRequestDataEx(TripRequestDataEx data)
+        {
+            if (data.Id == 0)
+                data.Id = TripRequestDataEx.Keys.DefaultIfEmpty(0).Max() + 1;
+
+            data.Status = "Черновик";
+
+            TripRequestDataEx[data.Id] = data;
+
+            return true;
+        }
+
+        public static bool AddNewTripRequestDataEx(TripRequestDataEx data)
+        {
+            data.Id = TripRequestDataEx.Keys.DefaultIfEmpty(0).Max() + 1;
+            data.Status = "Готов к согласованию";
+            TripRequestDataEx[data.Id] = data;
+
+            return true;
+        }
+
+        public static bool AddNewAdvanceReportDataEx(AdvanceReportDataEx data)
+        {
+            data.Id = AdvanceReportDataEx.Keys.DefaultIfEmpty(0).Max() + 1;
+            data.Status = "Готов к согласованию";
+            AdvanceReportDataEx[data.Id] = data;
+
+            return true;
+        }
+
+        public static bool SaveAdvanceReportDataEx(AdvanceReportDataEx data)
+        {
+            if (data.Id == 0)
+                data.Id = AdvanceReportDataEx.Keys.DefaultIfEmpty(0).Max() + 1;
+
+            data.Status = "Черновик";
+
+            AdvanceReportDataEx[data.Id] = data;
+
+            return true;
+        }
+
+        public static Dictionary<string, AccessAction> GetAccessList(string action, Int64 id)
+        {
+            var dic = new Dictionary<string, AccessAction>();
+
+            switch (action)
+            {
+                case "Просмотр1":
+                {
+                    dic.Add("formHeader", AccessAction.View);
+                    dic.Add("order", AccessAction.View);
+                    dic.Add("destinationsData", AccessAction.View);
+                    dic.Add("dailyCostsData", AccessAction.View);
+                    dic.Add("ticketRequestsData", AccessAction.View);
+                    dic.Add("travelCoordinator", AccessAction.View);
+                    break;
+                }
+                case "trip":
+                {
+                    dic.Add("formHeader", AccessAction.View);
+                    dic.Add("order", AccessAction.View);
+                    dic.Add("destinationsData", AccessAction.View);
+                    dic.Add("dailyCostsData", AccessAction.View);
+                    dic.Add("ticketRequestsData", AccessAction.View);
+                    dic.Add("travelCoordinator", AccessAction.View);
+                    break;
+                }
+                case "Просмотр":
+                case "Аннулировать":
+                case "На доработку":
+                case "Отказать":
+                case "Отозвать":
+                case "Согласовать":
+                {
+                    dic.Add("advanceRequestsData", AccessAction.View);
+                    break;
+                }
+            }
+
+
+            return dic;
+        }
+
+        public static Dictionary<string, Int32> GetLimitsData()
+        {
+            var dic = new Dictionary<string, Int32>();
+
+            dic.Add("Нотариальные услуги", 300);
+            dic.Add("Бензин", 700);
+            dic.Add("Прочие расходы", 500);
+            dic.Add("Конференция", 2100);
+            dic.Add("Школа провизора", 600);
+            dic.Add("Услуги грузчика", 3100);
+            dic.Add("Фармкружок", 30000);
+
+            return dic;
+        }
+    }
+}

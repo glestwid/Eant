@@ -1,0 +1,99 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Редактирование</h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th>ФИО</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="row.FullName" disabled />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Роли</th>
+                <td>
+                    <table>
+                        <tr ng-repeat="r in row.Roles track by $index">
+                            <td width="100%">
+                                <div class="form-group">
+                                    <select class="form-control" selectpicker ng-model="row.Roles[$index]" data-container="body"
+                                            ng-options="item as item.Name for item in roles track by item.Id" title="Выберите роль...">
+                                        <option data-hidden="true"></option>
+                                    </select>
+                                </div>
+
+                            </td>
+                            <td width="30px">
+                                <div class="form-group">
+                                    <button ng-disabled="row.Roles.length  < 2" class="btn btn-flat val-btn-remove" ng-click="removeRole($index)">
+                                        <span class="fa fa-remove"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="col-lg-12 nopadding">
+                        <button type="button" class="btn btn-flat btn-info val-btn pull-right" ng-click="addNewRole()"><i class="fa fa-plus"></i> Добавить строку</button>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <th>Заместитель</th>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="100%">
+                                <div class="form-group">
+                                    <select class="form-control" selectpicker ng-model="selectedDeputy"
+                                            ng-options="item.FullName for item in persons track by item.Id" title="Выберите заместителя...">
+                                        <option data-hidden="true"></option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td width="30px">
+                                <div class="form-group">
+                                    <button ng-disabled="selectedDeputy == undefined" class="btn btn-flat val-btn-remove" ng-click="removeDeputy()">
+                                        <span class="fa fa-remove"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>                    
+                </td>
+            </tr>
+            <tr>
+                <th width="200px">Даты замещения</th>
+                <td>
+                    <div class="form-group has-feedback">
+                        <input date-range-picker class="form-control date-picker" ui-mask="99.99.9999 - 99.99.9999" type="text" ng-model="row.DeputyRange" />
+                        <i class="fa fa-calendar form-control-feedback"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Ассистент</th>
+                <td>
+                    <select class="form-control" selectpicker ng-options="item.FullName for item in persons track by item.Id"
+                            ng-model="selectedAssistant" title="Выберите ассистента...">
+                        <option data-hidden="true"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Закрыть и сохранить</button>
+    </div>
+</div>
+<style>
+    .modal-dialog {
+        width: 45%;
+    }
+</style>

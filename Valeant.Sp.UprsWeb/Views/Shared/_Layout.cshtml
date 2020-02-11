@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Valeant</title>
+
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/Scripts")
+
+    @Scripts.Render("~/bundles/angConfigs")
+    @Scripts.Render("~/bundles/angDirectives")
+    @Scripts.Render("~/bundles/angServices")
+    @Scripts.Render("~/bundles/angFilters")
+    @Scripts.Render("~/bundles/angControllers")
+
+</head>
+<body class="hold-transition skin-blue layout-top-nav layout-boxed">
+    @RenderBody()
+    <div class="wrapper" ng-app="valeant.app" ng-controller="IndexController">
+
+        <header class="main-header">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" class="navbar-toggle"
+                            type="button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse" ng-class="{'in':!navCollapsed}" id="navbar-main">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <span class="sprite val-logo"></span>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav val-nav">
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <button ui-sref="home" class="btn  val-nav-btn">{{'Основная' | uppercase}}</button>
+                            </p>
+                        </li>
+
+
+
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle val-nav-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{'Заявки' | uppercase}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a ui-sref="tripRequests">{{'Заявки на командировку/сл. поездку' | uppercase}}</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a ui-sref="giftRequests">{{'Заявки на подарок' | uppercase}}</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a ui-sref="prepaymentRequests">{{'Заявки на аванс' | uppercase}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>
+
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <button ui-sref="advanceReports" class="btn val-nav-btn">{{'Авансовые отчёты' | uppercase}}</button>
+                            </p>
+                        </li>
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <button ui-sref="travelLists" class="btn val-nav-btn">{{'Маршрутные листы' | uppercase}}</button>
+                            </p>
+                        </li>
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <button ui-sref="approval" class="btn val-nav-btn" ng-hide="currentUser.IsSeniorAccountant">{{'Согласование' | uppercase}}</button>
+                                <div class="btn-group" ng-show="currentUser.IsSeniorAccountant">
+                                    <a class="btn dropdown-toggle val-nav-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{'Согласование' | uppercase}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a ui-sref="approval">{{'Согласование' | uppercase}}</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a ui-sref="paymentStamps">{{'Отметки об оплате' | uppercase}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>
+
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                @*<button ui-sref="approval" class="btn val-nav-btn" ng-hide="currentUser.IsAccountant">{{'Реестры' | uppercase}}</button>*@
+                                <!-- ng-show="currentUser.IsAccountant" -->
+                                <div class="btn-group" ng-show="checkShow('reester')">
+                                    <a class="btn dropdown-toggle val-nav-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{'Реестры' | uppercase}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+
+                                        <li>
+                                            <a ui-sref="reester({ reesterName: 'giftRequests' })">{{'Заявки на подарок' | uppercase}}</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="printing/export?statusesString=Работает,Уволен&search=">{{'Сотрудники' | uppercase}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="PrepaymentRequests/export">{{'Заявки на аванс' | uppercase}}</a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref="reester({ reesterName: 'travelLists' })">{{'Маршрутные листы' | uppercase}}</a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref="reester({ reesterName: 'overspents' })">{{'Перерасходы топлива' | uppercase}}</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>
+
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle val-nav-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{'Настройки'|uppercase}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-show="checkShow('countriesSettings')">
+                                            <a ui-sref="countriesSettings">{{'Страны' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('citiesSettings')">
+                                            <a ui-sref="citiesSettings">{{'Города' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('hotelsSettings')">
+                                            <a ui-sref="hotelsSettings">{{'Рекомендованные отели' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('personRolesSettings')">
+                                            <a ui-sref="personRolesSettings">{{'Сотрудники' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('costItemsSettings')">
+                                            <a ui-sref="costItemsSettings">{{'Статьи расходов' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('costCentersSettings')">
+                                            <a ui-sref="costCentersSettings">{{'Кост-центры и их типы' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('loadLedgerEntries')">
+                                            <a ui-sref="loadLedgerEntries">{{'Транзакции сотрудников ' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('giftRecieversSettings')">
+                                            <a ui-sref="giftRecieversSettings">{{'Получатели подарков' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('accountGroupsSettings')">
+                                            <a ui-sref="accountGroupsSettings">{{'Учетные группы' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('documentTypesSettings')">
+                                            <a ui-sref="documentTypesSettings">{{'Типы документов' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('tripAimsSettings')">
+                                            <a ui-sref="tripAimsSettings">{{'Цели поездки' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('dailyLimitsBaseSettings')">
+                                            <a ui-sref="dailyLimitsBaseSettings">{{'Ставки суточных' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('vehicleTypesSettings')">
+                                            <a ui-sref="vehicleTypesSettings">{{'Виды транспорта' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('rolesSettings')">
+                                            <a ui-sref="rolesSettings">{{'Должности' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('carsSettings')">
+                                            <a ui-sref="carsSettings">{{'Автомобили' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('fuelConsumptionSettings')">
+                                            <a ui-sref="fuelConsumptionSettings">{{'Потребление топлива' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('fuelCardsSettings')">
+                                            <a ui-sref="fuelCardsSettings">{{'Топливные карты' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('fuelCardsTransactionSettings')">
+                                            <a ui-sref="fuelCardsTransactionSettings">{{'Транзакции по топливным картам' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('exportAdvanceReport')">
+                                            <a ui-sref="exportAdvanceReport">{{'Выгрузка авансовых отчётов' | uppercase}}</a>
+                                        </li>
+                                        <li ng-show="checkShow('fuelCardsTransactionSettings')">
+                                            <a ui-sref="loadFrom1C">{{'Загрузка данных из 1С' | uppercase}}</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>
+
+                        <!--<li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <div class="btn-group">
+                                    <a class="btn  dropdown-toggle val-nav-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Отчёты
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a ui-sref="advanceTripReports">Сотрудник/Авансовый отчёт по поездке</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a ui-sref="costsReports">Сотрудник/Отчёт по представительским и текущим расходам</a></li>
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>-->
+                        <!--<li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <button class="btn  val-nav-btn">Настройки</button>
+                            </p>
+                        </li>-->
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ui-sref-active="active">
+                            <p class="navbar-btn">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="fa fa-repeat img-circle"></span>
+                                        {{currentUser.FullName}}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a ui-sref="profile">
+                                                <i class="fa fa-cog"></i> Мой профиль
+                                            </a>
+                                        </li>
+                                        @*<li class="divider"></li>
+                                            <li>
+                                                <a ng-click="logOut()">
+                                                    <i class="fa fa-sign-out"></i> Выход
+                                                </a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                            </p>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="content-wrapper">
+            <div ui-view></div>
+        </div>
+        <footer class="col-lg-12">
+            <div class="site-footer pull-right">Вопросы, замечания и предложения по системе UPRS можно направить Виктории Мазуровой: Victoria.Mazurova@Valeant.com</div>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/spcontext")
+</body>
+
+
+</html>

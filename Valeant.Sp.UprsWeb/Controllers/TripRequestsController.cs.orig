@@ -1,0 +1,167 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Security.Principal;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using Valeant.Sp.Uprs.Data;
+using Valeant.Sp.Uprs.Data.Domain;
+using Valeant.Sp.UprsWeb.Controllers.Entities;
+using Valeant.Sp.UprsWeb.Controllers.Utils;
+using Valeant.Sp.UprsWeb.Filters;
+using Valeant.Sp.UprsWeb.Helpers;
+using Valeant.Sp.UprsWeb.Security;
+
+namespace Valeant.Sp.UprsWeb.Controllers
+{
+    public class TripRequestsController : JsonNetController {
+        private const string DocumentName = "Заявка на командировку/служебную поездку";
+        private static readonly TokenMapItem[] TokenMapItems;
+        private static readonly StateMapItem[] StateMapItems;
+        private static readonly SelectorItem[] SelectorItems;
+
+        private static readonly SortedList<string, Selector> Selectors = new SortedList<string, Selector> {
+            {"IntervalMore14Days", IntervalMore14Days},
+            {"TravelCoordinatorLimitCheker", TravelCoordinatorLimitCheker}
+        };
+
+        static TripRequestsController() {
+            TokenMapItems = DataProvider.GetTokenMapItems(DocumentName);
+            StateMapItems = DataProvider.GetStateMapItems(DocumentName);
+            SelectorItems = DataProvider.GetSelectorItems(DocumentName);
+        }
+
+        [AllowJsonGet]
+        [HttpGet]
+        [Route("getAll")]
+        public async Task<JsonResult> GetAll() {
+            var human = DataProvider.GetHuman(HttpContext.User.Identity.Name);
+            var data = await DataProvider.ReadAdvance(null, human.Tokens.Where(x => x.Type == "O").Select(x => x.Value).ToArray());
+            return Json(data == null ? null : data.Select(Convert).ToArray());
+        }
+
+        [AllowJsonGet]
+        [HttpGet]
+        [Route("get")]
+        public async Task<JsonResult> Get(Int64 id) {
+            /*
+            var data = StaticData.GetTripRequestsData(id);
+            return Json(data);
+            */
+            var data = await DataProvider.ReadAdvance(id, null);
+            if (data == null || !data.Any()) return Json(null);
+            var d = data.First();
+            var o = DocumentHelper.GetDocumentContent<TripRequestDataEx>(data.First(), typeof(TripRequestDataEx));
+            o.Number = d.Number;
+            o.Id = d.Id;
+            return Json(o);
+        }
+
+        [HttpPost]
+        [Route("save")]
+        public async Task<JsonResult> Save([ModelBinder(typeof(JsonNetModelBinder))] TripRequestDataExRequest request)
+        {
+            try
+            {
+                await SaveTripRequestDataEx(request.data, request.Action);
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return Json(ex);
+            }
+        }
+
+        private static TripRequestData Convert(Advance data) {
+            return new TripRequestData {
+                Id = data.Id,
+                FromDate = data.Date.DateTime,
+                Number = data.Number,
+                Status = data.Status,
+                Sum = (int)data.Sum,
+                DocumentType = data.Type
+            };
+        }
+
+        private async Task SaveTripRequestDataEx(TripRequestDataEx data, string action) {
+            var claim = ((WindowsIdentity)HttpContext.User.Identity).Claims.FirstOrDefault(x => x.Type == ClaimsFiller.ValeantHumanIdClaimType);
+            var userId = long.Parse(claim.Value);
+            long? id = null;
+            var state = "Черновик";
+            var human = DataProvider.GetHuman(HttpContext.User.Identity.Name);
+            var tokens = new TokenCollection();
+            if (data.Id != 0) id = data.Id;
+            if (action != null)
+            {
+                if (id.HasValue)
+                {
+                    human = await DataProvider.ReaAdvanceCreatorAsync(id.Value);
+                    var document = await DataProvider.ReadAdvanceSimple(id.Value);
+                    state = DocumentHelper.CalcNextState(document, action, StateMapItems, SelectorItems, Selectors);
+                }
+                var tokensType = TokenMapItems.Where(x => x.StateName.Equals(state));
+                foreach (var tokenType in tokensType)
+                {
+                    switch (tokenType.TokenType.Last())
+                    {
+                        case '*':
+                            {
+                                var builder = DataProvider.BuildTokens[tokenType.TokenType];
+                                var token = builder(human);
+                                tokens.Add(token);
+                            }
+                            break;
+                        case '+':
+                            ;
+                            break;
+                        default:
+                            {
+                                var separatorIndex = tokenType.TokenType.IndexOf('-');
+                                if (separatorIndex <= 0) continue;
+                                var tType = tokenType.TokenType.Substring(0, separatorIndex - 1);
+                                tokens.Add(new Token { Type = tType, Value = tokenType.TokenType });
+                            }
+                            break;
+                    }
+
+                }
+                /*
+                tokens.AddRange(from tokenType in tokensType.Where(x => !x.TokenType.StartsWith("R")) 
+                                where DataProvider.BuildTokens.ContainsKey(tokenType.TokenType) 
+                                let token = DataProvider.BuildTokens[tokenType.TokenType](human)
+                                select new Token() {Type = token.Type + '*', Value = token.Value});
+                 */
+            }
+            else
+            {
+                var token = DataProvider.BuildTokens["O*"](human);
+                tokens.Add(token);
+            }
+            var type = typeof(TripRequestDataEx).FullName;
+            var element = DocumentHelper.SetDocumentContent(data, typeof(TripRequestDataEx));
+            await DataProvider.InsertOrUpdateAdvance(id,
+                    new DateTimeOffset(data.MainData.FromDate),
+                    DocumentName, 0, state,
+                    type, element, userId, DateTimeOffset.Now, tokens, action);
+        }
+
+        static internal int IntervalMore14Days(DocumentBase document)
+        {
+            return 1;
+        }
+
+        static internal int TravelCoordinatorLimitCheker(DocumentBase document)
+        {
+            return 1;
+        }
+
+        [HttpPost]
+        [Route("createNewTravelNumber")]
+        public async Task<JsonResult> CreateNewTravelNumber([ModelBinder(typeof(JsonNetModelBinder))] TripRequestDataEx data)
+        {
+            return Json(new Random().Next(0, 10000000));
+        }
+    }
+}

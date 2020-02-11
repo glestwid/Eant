@@ -1,0 +1,75 @@
+﻿<div class="col-lg-12 nopadding">
+    <div class="col-lg-8">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="col-lg-12 val-text">
+                            <div class="col-lg-5">
+                                <h4 class="val-text">Незакрытый баланс<br />по авансовым отчётам:</h4>
+                            </div>
+                            <div class="col-lg-5">
+                                <h2 class="pull-left val-text">{{transactionsSum}} р</h2>
+                            </div>
+
+                            <p class="navbar-btn ">
+                                <button ui-sref="ledgerEntries" class="btn val-btn btn-info btn-flat pull-right">{{'Посмотреть детали' | uppercase}}</button>
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-lg-12">
+                            <div class="col-lg-5">
+                                <h4 class="val-text">В том числе:</h4>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="table-responsive">
+                                    <table class="table val-table">
+                                        <tbody ng-repeat="i in issues" style="border:none">
+                                            <tr style="border:none">
+                                                <td class="val-text" style="border:none">{{i.title}}</td>
+                                                <td class="val-text" style="border:none">{{i.sum}} р</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-lg-4">
+        <div class="col-lg-12 btn-group-vertical val-btn-group-vertical">
+            <button type="button" class="btn val-btn btn-info" ng-click="createNew('prepaymentRequest')">{{'Заявка на аванс' | uppercase}}</button><br />
+            <button type="button" class="btn val-btn btn-info" ng-click="createNew('tripRequest')">{{'Заявка на командировку/сл. поездку' | uppercase}}</button><br />
+            <div class="dropdown val-dropdown">
+                <button class="btn btn-default dropdown-toggle col-lg-12" type="button" data-toggle="dropdown">
+                    {{'Авансовый отчёт' | uppercase}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="$option in reportTypes">
+                        <a style="cursor: pointer;" ng-click="createNew($option.type)">{{$option.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-default val-panel">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="val-text">Незакрытые заявки на поездки</h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div ui-if="gridOptions.data.length > 0" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize class="grid" ng-style="{height: gridOptions.appScopeProvider.getGridHeight()}"></div>
+        </div>
+    </div>
+</div>

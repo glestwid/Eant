@@ -1,0 +1,172 @@
+﻿<style>
+    .form-group > .input-group {
+        width: 140px;
+    }
+</style>
+<div class="row col-lg-12">
+    <div class="col-lg-10">
+        <h5 class="help-block">Заявки / Заявка на подарок</h5>
+    </div>
+    <div class="col-lg-2">
+        <button type="button" class="btn btn-default pull-right" ng-click="print()" ng-if="action.indexOf('Создать') == -1">
+            <span class="val-text">{{'Печать'|uppercase}}</span>
+        </button>
+    </div>
+</div>
+<div class="row col-lg-12">
+    <hr />
+</div>
+<form name="formGift" class="col-lg-12">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <span class="col-lg-2 control-label text-muted">
+                <p class="pull-left val-asterisk">Дата документа</p>
+            </span>
+            <div class="col-lg-6">
+                <div class="has-feedback single-datepicker">
+                    <input ng-disabled="true" date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="formData.date" />
+                    <i class="fa fa-calendar form-control-feedback"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-2 control-label text-muted">
+                <p class="pull-left val-asterisk">Название подарка</p>
+            </span>
+            <div class="col-lg-6">
+                <input class="form-control" ng-disabled="accessList.giftRequest == 1" placeholder="..." ng-model="formData.description" validation-name="input" validation-dynamically-defined="validations" />
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-2 control-label text-muted">
+                <p class="pull-left val-asterisk">Причина вручения</p>
+            </span>
+            <div class="col-lg-6">
+                <input class="form-control" ng-disabled="accessList.giftRequest == 1" placeholder="..." ng-model="formData.reason" validation-name="input" validation-dynamically-defined="validations" />
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-2 control-label text-muted">
+                <p class="pull-left val-asterisk">Стоимость подарка, руб</p>
+            </span>
+            <div class="col-lg-6">
+                <input ng-disabled="accessList.giftRequest == 1" ng-focus="inputFocus(formData.sum)" ng-blur="inputBlur(formData.sum)" ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$" type="text" class="form-control" ng-model="formData.sum" validation-name="sum" validation-dynamically-defined="validations" />
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-lg-2 control-label text-muted">
+                <p class="pull-left val-asterisk">Плановая дата вручения</p>
+            </span>
+            <div class="col-lg-6">
+                <div class="has-feedback single-datepicker">
+                    <input date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" ng-disabled="accessList.giftRequest == 1" class="form-control date-picker" type="text" ng-model="formData.giftDate" validation-name="date" validation-dynamically-defined="validations" />
+                    <i class="fa fa-calendar form-control-feedback"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12 nopadding">
+            <div class="panel panel-default val-panel">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="form-inline col-lg-12">
+                            <h4 class="col-lg-12 val-text">Данные получателя подарка</h4>
+                        </div>
+                    </div>
+                </div>
+                <div name="formTrip" class="panel-body table-responsive">
+                    <!--<div class="form-group input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                    </div>-->
+                    <div class="col-lg-7 col-lg-offset-5">
+                        <div class="form-group input-group">
+                            <select class="form-control" ng-disabled="accessList.giftRequest == 1" ng-model="formData.giftReciever" selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" 
+                                    ng-options="(gr.SecondName + ' ' + gr.Name + ' ' + gr.MiddleName + ' [' + gr.Organization + ', ' + gr.Position + ']') for gr in giftRecievers track by gr.Id" validation-name="reciever" validation-dynamically-defined="validations"
+                                    data-size="10" data-container="body" title="Выберите получателя..." ng-change="getPreviousGifts(formData.giftReciever)">
+                                <option data-hidden="true"></option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button ng-disabled="accessList.giftRequest == 1" ng-click="addGiftReciever()" class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <span>{{formData.giftReciever.SecondName + ' ' + formData.giftReciever.Name + ' ' + formData.giftReciever.MiddleName}}</span><br />
+                        <span>{{formData.giftReciever.Organization}}</span><br />
+                        <span>{{formData.giftReciever.Position}}</span><br />
+                        <span>Номер действующего договора с ООО «ВАЛЕАНТ»&nbsp;&nbsp;&nbsp;&nbsp;{{formData.giftReciever.AgreementNumber}}</span>
+                        <hr />
+                        <span class="text-bold">
+                            Подтверждаю, что Данное лицо <span style="text-decoration: underline">не является</span> медицинским/ фармацевтическим работником или должностным лицом,
+                            попадающим под действие Закона США О противодействии зарубежной коррупционной практики Конвенции ОЭСР
+                        </span>
+                    </div>
+                    <div class="col-lg-8">
+                        <h5 class="col-lg-12 val-text pull-left">Информация о подарках за последние 12 месяцев</h5>
+                        <table class="table table-bordered table-hover val-table ">
+                            <thead>
+                                <tr>
+                                    <th width="150px">Дата</th>
+                                    <th>Подарок</th>
+                                    <th width="150px">Сумма подарка</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="g in formData.gifts track by $index">
+                                <tr>
+                                    <td width="150px">{{g.giftDate | date : "dd.MM.yyyy"}}</td>
+                                    <td>{{g.description}}</td>
+                                    <td width="150px">{{g.sum}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span class="col-lg-12">Были ли подарки от Компании за последние 12 месяцев кроме перечисленных</span>
+                    <div class="form-group">
+                        <div class="col-lg-1">
+                            <div class="checkbox pull-right">
+                                <checkbox ng-disabled="accessList.giftRequest == 1" ng-model="formData.otherGiftsExist"></checkbox> Да
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <input ng-disabled="accessList.giftRequest == 1 || formData.otherGiftsExist == false" class="form-control" type="text" placeholder="Описание, если да" ng-model="formData.otherGiftsComment" validation-name="comment" validation-dynamically-defined="validations"/>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <input ng-disabled="accessList.giftRequest == 1 || formData.otherGiftsExist == false"
+                                       type="text" class="form-control" placeholder="Сумма"
+                                       ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$"
+                                       ng-model="formData.otherGiftsSum" 
+                                       validation-name="otherGiftsSum" validation-dynamically-defined="validations">
+                                <div class="input-group-addon">р.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div ng-if="formData.approvalPath.length > 0">
+                <span class="text-muted">Маршрут согласования</span>
+                <ul>
+                    <li ng-repeat="path in formData.approvalPath track by $index" class="text-muted">{{path}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="pull-right val-btn-group-horizontal">
+            <button ng-hide="formData.actions[0] == 'Empty' "
+                    ng-repeat="$action in formData.actions" type="button" class="btn btn-default" ng-click="save($action)">
+                <span class="val-text">{{$action == 'Отправить' ? 'Отправить документ на согласование' : $action | uppercase}}</span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="goBack()">{{'Назад к списку'|uppercase}}</button>
+        </div>
+    </div>
+    <br />
+    <br />
+</form>

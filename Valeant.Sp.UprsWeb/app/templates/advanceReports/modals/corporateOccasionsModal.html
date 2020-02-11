@@ -1,0 +1,109 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Корпоративное мероприятие</h4>
+    </div>
+    <div class="modal-body">
+        <form name="formCorporate">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Дата</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <div class="has-feedback single-datepicker">
+                            <input date-range-picker options="{singleDatePicker: true}" ui-mask="99.99.9999" class="form-control date-picker" type="text" ng-model="formData.date" validation-name="name" validation-dynamically-defined="validations"/>
+                            <i class="fa fa-calendar form-control-feedback"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Место проведения</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="formData.place" validation-name="name" validation-dynamically-defined="validations"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Цель мероприятия</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="formData.aim" validation-name="name" validation-dynamically-defined="validations"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-4 control-label text-muted">
+                        <p class="pull-left val-asterisk">Сумма, руб</p>
+                    </span>
+                    <div class="col-lg-8">
+                        <input ng-change="averageCost()" ng-focus="inputFocus(formData.sum)" ng-blur="inputBlur(formData.sum)" ng-pattern-restrict pattern="^(\d*|\d+(\.\d{0,2})?)$" type="text" class="form-control" ng-model="formData.sum" validation-name="sum" validation-dynamically-defined="validations" />
+                    </div>
+                </div>
+                <div class="row col-lg-12 nopadding">
+                    <div class="panel panel-default val-panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="form-inline col-lg-12">
+                                    <h4 class="col-lg-12 val-text">Участники</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div name="formTrip" class="panel-body table-responsive nopadding">
+                            <table class="table table-bordered table-hover val-table">
+                                <thead>
+                                    <tr>
+                                        <th>ФИО </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="t in formData.participants.rows track by $index">
+                                        <td width="20px">{{$index + 1}}</td>
+                                        <td>
+                                            <select selectpicker="{liveSearch: true, noneResultsText:'Нет совпадений {0}'}" ng-model="t.person" class="form-control" data-container="body"
+                                                     ng-options="(person.FullName + ' [' + person.Position + ']') for person in filteredPersons(t.person) track by person.Id" data-size="10" title="Выберите сотрудника..." ng-change="averageCost()">
+                                                <option data-hidden="true"></option>
+                                            </select>
+                                        </td>
+                                        <td width="30px">
+                                            <button type="button" class="btn btn-flat val-btn-remove" ng-click="removeParticipant()">
+                                                <span class="fa fa-remove"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-lg-12 pull-left">
+                                   <span class="col-lg-9">Выбрано: {{countParticipants()}}
+                                        <span class="col-lg-offset-1">Средняя сумма: {{formData.average}}
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="col-lg-12 pull-right">
+                                    <button type="button" class="btn btn-flat btn-info val-btn pull-right" ng-click="addParticipant()">
+                                        <i class="fa fa-plus"></i> Добавить участника
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary val-btn" ng-click="ok()">Сохранить</button>
+    </div>
+</div>
+<style>
+    .modal-dialog {
+        width: 35%;
+    }
+</style>

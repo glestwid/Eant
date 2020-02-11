@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/SPIntegration" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema targetNamespace="urn:microsoft-dynamics-schemas/codeunit/SPIntegration">
+      <s:include schemaLocation="http://localhost/NavisionTest/CreateAdvanceStatement.asmx?schema=schema1" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateAdvanceStatementHeaderSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAdvanceStatementHeader" />
+  </wsdl:message>
+  <wsdl:message name="CreateAdvanceStatementHeaderSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAdvanceStatementHeader_Result" />
+  </wsdl:message>
+  <wsdl:message name="CreateAdvanceStatementLineSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAdvanceStatementLine" />
+  </wsdl:message>
+  <wsdl:message name="CreateAdvanceStatementLineSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAdvanceStatementLine_Result" />
+  </wsdl:message>
+  <wsdl:portType name="SPIntegration_Binding">
+    <wsdl:operation name="CreateAdvanceStatementHeader">
+      <wsdl:input message="tns:CreateAdvanceStatementHeaderSoapIn" />
+      <wsdl:output message="tns:CreateAdvanceStatementHeaderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAdvanceStatementLine">
+      <wsdl:input message="tns:CreateAdvanceStatementLineSoapIn" />
+      <wsdl:output message="tns:CreateAdvanceStatementLineSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SPIntegration_Binding" type="tns:SPIntegration_Binding">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateAdvanceStatementHeader">
+      <soap:operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SPIntegration:CreateAdvanceStatementHeader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAdvanceStatementLine">
+      <soap:operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SPIntegration:CreateAdvanceStatementLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SPIntegration_Binding1" type="tns:SPIntegration_Binding">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateAdvanceStatementHeader">
+      <soap12:operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SPIntegration:CreateAdvanceStatementHeader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAdvanceStatementLine">
+      <soap12:operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SPIntegration:CreateAdvanceStatementLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

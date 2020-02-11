@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soaphttp="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:microsoft-dynamics-schemas/page/getcarlist" targetNamespace="urn:microsoft-dynamics-schemas/page/getcarlist" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/getcarlist" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:complexType name="GetCarList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Inventory_Number" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Responsible_Employee" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="FA_Location_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vehicle_Identification_Number" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vehicle_Model" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Vehicle_Reg_No" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetCarList_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="GetCarList" type="tns:GetCarList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="GetCarList_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="No" />
+          <xsd:enumeration value="Description" />
+          <xsd:enumeration value="Inventory_Number" />
+          <xsd:enumeration value="Responsible_Employee" />
+          <xsd:enumeration value="FA_Location_Code" />
+          <xsd:enumeration value="Vehicle_Identification_Number" />
+          <xsd:enumeration value="Vehicle_Model" />
+          <xsd:enumeration value="Vehicle_Reg_No" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="GetCarList_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:GetCarList_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="No" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="GetCarList" type="tns:GetCarList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="GetCarList" type="tns:GetCarList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:GetCarList_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:GetCarList_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <portType name="GetCarList_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+  </portType>
+  <binding name="GetCarList_Binding" type="tns:GetCarList_Port">
+    <soaphttp:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Read">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getcarlist:Read" style="document" />
+      <input name="Read">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="Read_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getcarlist:ReadByRecId" style="document" />
+      <input name="ReadByRecId">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getcarlist:ReadMultiple" style="document" />
+      <input name="ReadMultiple">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getcarlist:IsUpdated" style="document" />
+      <input name="IsUpdated">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="IsUpdated_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <soaphttp:operation soapAction="urn:microsoft-dynamics-schemas/page/getcarlist:GetRecIdFromKey" style="document" />
+      <input name="GetRecIdFromKey">
+        <soaphttp:body use="literal" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <soaphttp:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="GetCarList_Service">
+    <port name="GetCarList_Port" binding="tns:GetCarList_Binding">
+      <soaphttp:address location="http://DMITRY-MOBILE:8088/mockGetCarList_Binding" />
+    </port>
+  </service>
+</definitions>

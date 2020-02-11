@@ -1,0 +1,232 @@
+﻿.panel-heading {
+    background-color: white !important;
+    border-bottom: 5px solid #737373;
+}
+
+.val-table th {
+    color: #737373;
+    font-family: 'dinpro-medium';
+    font-weight: 300;
+    font-size: 13pt;
+}
+
+.val-table td {
+    vertical-align: middle !important;
+}
+
+.val-btn-group-vertical > .btn {
+    -ms-border-radius: 4px !important;
+    border-radius: 4px !important;
+}
+
+.val-.btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+    border-radius: 4px;
+}
+
+.val-btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+    border-radius: 4px;
+}
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.nomargin {
+    margin: 0 !important;
+}
+
+.val-panel {
+    -ms-border-radius: 0;
+    border-radius: 0;
+    margin-bottom: 0 !important;
+}
+
+.navbar-nav > li {
+    margin: 5px;
+}
+
+.navbar-btn {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+/*-----oi-select-----*/
+oi-select:not(.multiple):not(.cleanMode) .select-search:after {
+    content: "\f078";
+    position: absolute;
+    right: 12px;
+    width: 10px;
+    height: 10px;
+    margin-top: -25px;
+    border: none;
+    border-width: 5px 5px 0 5px;
+    font-family: FontAwesome;
+    color: #737373;
+    cursor: pointer;
+}
+
+oi-select .select-search {
+    width: inherit;
+}
+
+oi-select .select-dropdown {
+    max-height: 300px !important;
+}
+
+oi-select .select-dropdown-optgroup-option.active:not(.disabled) {
+    background-color: #A03f9b;
+    color: white !important;
+}
+
+oi-select .select-search-list-item_input {
+    margin: 4px 0 3px 4px !important;
+}
+
+oi-select .select-search-list-item_selection {
+    background: white !important;
+}
+
+    oi-select .select-search-list-item_selection:active, oi-select .select-search-list-item_selection.focused {
+        border: none !important;
+    }
+
+/*-----bootstrap-select-----*/
+.bootstrap-select a:hover {
+    background: #A03f9b !important;
+    color: white !important;
+}
+
+.bootstrap-select .dropdown-menu li.disabled {
+    display: none;
+}
+
+.bootstrap-select a:focus {
+    background: #A03f9b !important;
+    color: white !important;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .caret {
+    top: auto !important;
+    margin-top: 0 !important;
+    width: 10px;
+    height: 10px;
+    border: none;
+    font-family: FontAwesome;
+    font-weight: 100;
+}
+
+    .bootstrap-select.btn-group .dropdown-toggle .caret:before {
+        content: "\f078";
+        color: #737373;
+    }
+
+.bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
+    border-radius: 0;
+}
+
+.navbar .val-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+
+.ui-grid-top-panel {
+    color: #737373;
+    font-family: 'dinpro-medium';
+    font-weight: 300;
+    font-size: 13pt;
+    background: white !important;
+}
+
+.ui-grid-row:nth-child(even) .ui-grid-cell,
+.ui-grid-row:nth-child(odd) .ui-grid-cell {
+    background-color: white !important;
+}
+
+.ui-grid-row {
+    height: auto !important;
+}
+ .ui-grid-row > div {
+        display: table-row;
+    }
+
+    .ui-grid-row .ui-grid-cell {
+        display: table-cell;
+        float: none;
+        vertical-align: middle;
+        height: auto !important;
+    }
+
+
+.ui-grid-cell {
+    border-bottom: 1px solid;
+    border-color: #d4d4d4 !important;
+    display: table-cell;
+    height: auto !important;
+    overflow: visible;
+    position: static;
+    float: none;
+}
+
+.ui-grid-row:last-child .ui-grid-cell {
+    border-bottom: 1px solid !important;
+    border-color: #d4d4d4 !important;
+}
+
+.ui-grid-cell-contents {
+    padding: 10px !important;
+    cursor: default;
+}
+
+    .ui-grid-cell-contents:focus {
+        outline: none;
+    }
+
+.ui-grid-cell-contents-actions {
+    padding: 2px !important;
+    text-align: center;
+}
+
+.ui-grid-header-cell-label {
+    -moz-user-select: initial !important;
+    -ms-user-select: initial !important;
+    -webkit-user-select: initial !important;
+    user-select: initial !important;
+}
+
+.ui-grid-column-menu-button {
+    display: none;
+}
+
+
+.ui-grid-viewport .ui-grid-cell-contents {
+    word-wrap: break-word;
+    white-space: normal !important;
+    overflow: visible;
+}
+
+/*.ui-grid-row {
+    height: auto !important;
+    display: table-row;
+    position: static;
+}
+
+    .ui-grid-row div[role=row] {
+        display: flex;
+        align-content: stretch;
+    }*/
+
+.ext-table td {
+    vertical-align: top !important;
+}

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{701424A3-5656-49A2-B8C3-03C9CD61A961}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Valeant.Sp.Uprs.Data</RootNamespace>
+    <AssemblyName>Valeant.Sp.Uprs.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
+    <OutputPath>bin\Publish\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper.StrongName, Version=1.50.0.0, Culture=neutral, PublicKeyToken=e3e8412083d25dd3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.StrongName.1.50.0\lib\net45\Dapper.StrongName.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentMigrator, Version=1.6.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApprovalSheetItem.cs" />
+    <Compile Include="ApprovalSheetItems.cs" />
+    <Compile Include="BuildToken.cs" />
+    <Compile Include="Consts\RoleCode.cs" />
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="DataProviderCostItems.cs" />
+    <Compile Include="DataProviderFiles.cs" />
+    <Compile Include="DataProviderRoles.cs" />
+    <Compile Include="DataProviderSimpleDictionary.cs" />
+    <Compile Include="Domain\AccessListVersion2.cs" />
+    <Compile Include="Domain\ActionCollectionVersion2.cs" />
+    <Compile Include="Domain\ActionMapItem.cs" />
+    <Compile Include="Domain\ActionVersion2.cs" />
+    <Compile Include="Domain\Advance.cs" />
+    <Compile Include="Domain\AdvanceCollection.cs" />
+    <Compile Include="Domain\AdvanceCollectionVersion3.cs" />
+    <Compile Include="Domain\AdvanceContent.cs" />
+    <Compile Include="Domain\AdvanceVersion3.cs" />
+    <Compile Include="Domain\ApprovedHistoryItemCollectionVersion3.cs" />
+    <Compile Include="Domain\ApprovedHistoryItemVersion3.cs" />
+    <Compile Include="Domain\AttachmentVersion2.cs" />
+    <Compile Include="Domain\BlockAccessListVersion2.cs" />
+    <Compile Include="Domain\Car.cs" />
+    <Compile Include="Domain\CarCollection.cs" />
+    <Compile Include="Domain\ClosureVersion2.cs" />
+    <Compile Include="Domain\Condition.cs" />
+    <Compile Include="Domain\CostcenterCollection.cs" />
+    <Compile Include="Domain\CostcenterType.cs" />
+    <Compile Include="Domain\Costcenter.cs" />
+    <Compile Include="Domain\CountryType.cs" />
+    <Compile Include="Domain\DepartmentConditionType.cs" />
+    <Compile Include="Domain\DepartmentStatuses.cs" />
+    <Compile Include="Domain\DepartmentType.cs" />
+    <Compile Include="Domain\DocumentBase.cs" />
+    <Compile Include="Domain\DocumentBaseVersion3.cs" />
+    <Compile Include="Domain\EmployeeLedgerEntry.cs" />
+    <Compile Include="Domain\EmployeeLedgerEntryCollection.cs" />
+    <Compile Include="Domain\EmployeePositionType.cs" />
+    <Compile Include="Domain\EmployeeStatuses.cs" />
+    <Compile Include="Domain\EmployeeType.cs" />
+    <Compile Include="Domain\Expenditure\ChangeExpenditureCommand.cs" />
+    <Compile Include="Domain\Expenditure\ExpenditureInfo.cs" />
+    <Compile Include="Domain\Expenditure\ExpenditureDocumentType.cs" />
+    <Compile Include="Domain\Expenditure\ExpenditureLimit.cs" />
+    <Compile Include="Domain\FieldNode.cs" />
+    <Compile Include="Domain\FieldNodeCollection.cs" />
+    <Compile Include="Domain\FuelCardTransaction.cs" />
+    <Compile Include="Domain\HeaderNode.cs" />
+    <Compile Include="Domain\HeaderNodeCollection.cs" />
+    <Compile Include="Domain\HistoryItem.cs" />
+    <Compile Include="Domain\HistoryItemCollection.cs" />
+    <Compile Include="Domain\HistoryMapItem.cs" />
+    <Compile Include="Domain\HistoryMapItemCollection.cs" />
+    <Compile Include="Domain\Human.cs" />
+    <Compile Include="Domain\HumanCollection.cs" />
+    <Compile Include="Domain\HumanLight.cs" />
+    <Compile Include="Domain\HumanType.cs" />
+    <Compile Include="Domain\IItem.cs" />
+    <Compile Include="Domain\ItemCollection.cs" />
+    <Compile Include="Domain\LimitItem.cs" />
+    <Compile Include="Domain\LimitItemCollection.cs" />
+    <Compile Include="Domain\Node.cs" />
+    <Compile Include="Domain\NodeDescription.cs" />
+    <Compile Include="Domain\NodeItemBaseVersion2.cs" />
+    <Compile Include="Domain\NodeItemVersion2.cs" />
+    <Compile Include="Domain\NodeType.cs" />
+    <Compile Include="Domain\NodeVersion2.cs" />
+    <Compile Include="Domain\NotificationItem.cs" />
+    <Compile Include="Domain\NotificationItemCollection.cs" />
+    <Compile Include="Domain\OrganizationType.cs" />
+    <Compile Include="Domain\PrepaymentRequestReportLine.cs" />
+    <Compile Include="Domain\RowNode.cs" />
+    <Compile Include="Domain\RowNodeCollection.cs" />
+    <Compile Include="Domain\SelectorVersion2.cs" />
+    <Compile Include="Domain\SettingItem.cs" />
+    <Compile Include="Domain\Settings.cs" />
+    <Compile Include="Domain\SimpleDictionaryFull.cs" />
+    <Compile Include="Domain\SimpleDictionaryItem.cs" />
+    <Compile Include="Domain\StateMapItemVersion2.cs" />
+    <Compile Include="Domain\StateMapItem.cs" />
+    <Compile Include="Domain\Role.cs" />
+    <Compile Include="Domain\RoleCollection.cs" />
+    <Compile Include="Domain\SelectorItem.cs" />
+    <Compile Include="Domain\SelectorItemCollection.cs" />
+    <Compile Include="Domain\SimpleDictionary.cs" />
+    <Compile Include="Domain\StateMapItemCollection.cs" />
+    <Compile Include="Domain\StateVersion2.cs" />
+    <Compile Include="Domain\TableNode.cs" />
+    <Compile Include="Domain\Token.cs" />
+    <Compile Include="Domain\TokenCollection .cs" />
+    <Compile Include="Domain\TokenMapItem.cs" />
+    <Compile Include="Domain\TokenMapItemCollection.cs" />
+    <Compile Include="IContainsMetadata.cs" />
+    <Compile Include="MapperHelper.cs" />
+    <Compile Include="Matrix\DocumentAccessListVersion3.cs" />
+    <Compile Include="Matrix\DocumentBlockAccessTypeVersion3.cs" />
+    <Compile Include="Matrix\DocumentBlockAccessVersion3.cs" />
+    <Compile Include="Matrix\DocumentBlocksAccessVersion3.cs" />
+    <Compile Include="Matrix\IntersectionVersion3.cs" />
+    <Compile Include="Matrix\MatrixVersion3.cs" />
+    <Compile Include="Matrix\MatrixBase.cs" />
+    <Compile Include="Matrix\NodePropertiesVersion3.cs" />
+    <Compile Include="Matrix\NodePropertyVersion3.cs" />
+    <Compile Include="Matrix\NodeVersion3.cs" />
+    <Compile Include="Matrix\NotificationVersion3.cs" />
+    <Compile Include="Matrix\StateVersion3.cs" />
+    <Compile Include="Matrix\TokenVersion3.cs" />
+    <Compile Include="MetadataCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\AssemblyInfo.Common.cs">
+      <Link>AssemblyInfo.Common.cs</Link>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Query\DocumentQuery.cs" />
+    <Compile Include="Query\DocumentState.cs" />
+    <Compile Include="Query\DocumentType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InstallationDummyFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\NewFolder1\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

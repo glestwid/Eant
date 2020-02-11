@@ -1,0 +1,29 @@
+﻿<div class="row col-lg-12">
+    <div class="panel panel-default val-panel">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="col-lg-4 val-text nopadding">{{Title}}</h3>
+                <div class="col-lg-5 pull-left">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <!--<div class="col-lg-12">
+                    <button class="btn btn-primary val-btn pull-left" ng-click="getReester()">Сохранить реестр</button>
+                </div>-->
+                <div class="pull-left">
+                    <span class="input-group-btn">
+                        <select selectpicker ng-model="selectedDateRangeCriteria">
+                            <option ng-repeat="c in ['Месяц', 'Квартал', 'Год', 'Все']">{{c}}</option>
+
+                        </select>      
+                        <button class="btn btn-primary val-btn" ng-click="getReester()">Сохранить реестр</button>
+                     </span>
+
+                 </div>
+               
+            </div>
+        </div>
+     
+    </div>
+</div>
